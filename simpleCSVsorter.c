@@ -4,7 +4,9 @@
 
 int main(int argc, char* argv[]){
   readfile();
-  merge();
+  mergesort();
   print();
   return 0;
 }
+
+
