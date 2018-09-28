@@ -4,13 +4,22 @@
 struct Node{   // to store a linked list in the data structure
   int data;
   struct Node* next;
-}
+};
  // function prototypes //
-struct Node* mergeSort( struct Node* a, struct Node* b){
-  void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** backRef);
+struct Node* SortedMerge( struct Node* a, struct Node* b){
+  struct result() = null;
+void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** backRef);
+  
+    //Best case//
+      
+      if(a == NULL)
+      return(b);
+      else if(b == NULL)
+      return(b);
+  
   // sorts LL by changing next pointers, not data. //
   
-  void sortedMerge (struct Node** headRef){
+  void MergeSort (struct Node** headRef){
     struct Node * head = *headRef;
     struct Node* a;
     struct Node* b;
@@ -23,29 +32,19 @@ struct Node* mergeSort( struct Node* a, struct Node* b){
     FrontBackSplit(head, &a, &b);
     
    // Recursive sort sublist//
-    sortedMerge(&a);
-    SortedMerge(&b);
+    MergeSort(&a);
+    MergeSort(&b);
     
    // answer = merg the 2 sorted lists together//
-    *headRef = mergeSort(a, b);
-    
-    struct Node* mergeSort(struct Node* a, struct Node* b)(
-      struct Node* result = Null;
-      
-      //Best case//
-      
-      if(a ==N ULL)
-      return(b);
-      else if(b == Null)
-      return(b);
+    *headRef = SortedMerge(a, b);
       
       // choose between a or b, than recur //
       if(a->data <= b->data){
         result = a;
-        result->next = mergeSort(a->next, b);
+        result->next = SortedMerge(a->next, b);
       }else{
         result b;
-        result->next = mergeSort(a, b->next);
+        result->next = SortedMerge(a, b->next);
       }
       return(result);
      }
@@ -67,12 +66,12 @@ struct Node* mergeSort( struct Node* a, struct Node* b){
       }
       // slow is tye midpoint area so split there //
       *frontRef = source;
-      backRef = slow->next;
+      *backRef = slow->next;
       slow->next = NULL;
     }
       // print nodes in a LL //
       
-      void listPrint(struct Node *node){
+      void printList(struct Node *node){
         while(node != NULL){
           printf("%d", node->data);
           node = node->next;
@@ -81,7 +80,7 @@ struct Node* mergeSort( struct Node* a, struct Node* b){
      // insert a node in the beginning of a LL //
       void push(struct Node** head_ref, int new_data){
         // allocate node //
-        struct Node* new node = (strcut Node*) malloc(sizeof(struct Node));
+        struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
         
         // put in data //
         new_node->data = new_data;
@@ -92,4 +91,3 @@ struct Node* mergeSort( struct Node* a, struct Node* b){
         // move head to point to the new node //
         (*head_ref) = new_node;
       }
-    
