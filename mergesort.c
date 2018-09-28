@@ -6,8 +6,7 @@ struct Node{   // to store a linked list in the data structure
   struct Node* next;
 };
  // function prototypes //
-struct Node* SortedMerge( struct Node* a, struct Node* b){
-  struct result() = null;
+struct Node* SortedMerge(struct Node* a, struct Node* b){
 void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** backRef);
   
     //Best case//
@@ -20,7 +19,7 @@ void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** 
   // sorts LL by changing next pointers, not data. //
   
   void MergeSort (struct Node** headRef){
-    struct Node * head = *headRef;
+    struct Node* head = *headRef;
     struct Node* a;
     struct Node* b;
     
@@ -37,13 +36,23 @@ void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** 
     
    // answer = merg the 2 sorted lists together//
     *headRef = SortedMerge(a, b);
+    
+    struct Node* SortedMerge(struct Node* a, struct Node* b) 
+{ 
+struct Node* result = NULL; 
+  
+/* Base cases */
+if (a == NULL) 
+    return(b); 
+else if (b == NULL) 
+    return(a);
       
       // choose between a or b, than recur //
       if(a->data <= b->data){
         result = a;
         result->next = SortedMerge(a->next, b);
       }else{
-        result b;
+        result(b);
         result->next = SortedMerge(a, b->next);
       }
       return(result);
