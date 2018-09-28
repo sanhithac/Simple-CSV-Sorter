@@ -52,7 +52,7 @@ else if (b == NULL)
         result = a;
         result->next = SortedMerge(a->next, b);
       }else{
-        result(b);
+        result = b;
         result->next = SortedMerge(a, b->next);
       }
       return(result);
@@ -100,3 +100,5 @@ else if (b == NULL)
         // move head to point to the new node //
         (*head_ref) = new_node;
       }
+  }
+}
