@@ -2,6 +2,7 @@
 #include<stdlib.h>
 
 struct Node{   // to store a linked list in the data structure
+ 
   int data;
   struct Node* next;
 };
@@ -9,16 +10,10 @@ struct Node{   // to store a linked list in the data structure
 struct Node* SortedMerge(struct Node* a, struct Node* b){
 void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** backRef);
   
-    //Best case//
-      
-      if(a == NULL)
-      return(b);
-      else if(b == NULL)
-      return(b);
-  
   // sorts LL by changing next pointers, not data. //
   
-  void MergeSort (struct Node** headRef){
+  void MergeSort (struct Node** headRef)
+  {
     struct Node* head = *headRef;
     struct Node* a;
     struct Node* b;
@@ -37,7 +32,7 @@ void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** 
    // answer = merg the 2 sorted lists together//
     *headRef = SortedMerge(a, b);
     
-    struct Node* SortedMerge(struct Node* a, struct Node* b) 
+struct Node* SortedMerge(struct Node* a, struct Node* b) 
 { 
 struct Node* result = NULL; 
   
@@ -51,7 +46,9 @@ else if (b == NULL)
       if(a->data <= b->data){
         result = a;
         result->next = SortedMerge(a->next, b);
-      }else{
+      }
+      else
+      {
         result = b;
         result->next = SortedMerge(a, b->next);
       }
@@ -66,9 +63,11 @@ else if (b == NULL)
       
       // keep going woith 'fast' and 'slow' nodes, each one node //
       
-      while(fast != NULL){
+      while(fast != NULL)
+      {
         fast = fast->next;
-        if(fast != NULL){
+        if(fast != NULL)
+        {
           slow = slow->next;
           fast = fast->next;
         }
@@ -100,5 +99,3 @@ else if (b == NULL)
         // move head to point to the new node //
         (*head_ref) = new_node;
       }
-  }
-}
