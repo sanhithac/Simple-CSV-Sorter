@@ -49,4 +49,9 @@ static void remove_leading_spaces(char* line)
     *line += i;
    }
 } 
-  
+  temp = head;
+  while (Node->data != NULL){
+    printf("Data = &d\n", temp->data);
+    temp = temp->next;
+  }
+
