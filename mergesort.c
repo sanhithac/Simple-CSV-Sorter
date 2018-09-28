@@ -1,5 +1,22 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+
+int main(){
+ char str1[100];
+ char str2[100];
+ int ret;
+ ret = strcmp(str1, str2);
+ 
+ if(ret < 0){
+  printf("str1 is less than str2");
+ }else if(ret > 0){
+  printf("str2 is less than str1");
+ }else{
+  printf("str1 is equal to str2");
+ }
+   return(0);
+}
 
 struct Node{   // to store a linked list in the data structure
  
@@ -7,16 +24,16 @@ struct Node{   // to store a linked list in the data structure
   struct Node* next;
 };
  // function prototypes //
-struct Node* SortedMerge(struct Node* a, struct Node* b){
-void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** backRef);
+Node* SortedMerge(Node* a, Node* b){
+void FrontBackSplit (Node* source, Node** frontRef, Node** backRef);
   
   // sorts LL by changing next pointers, not data. //
   
-  void MergeSort (struct Node** headRef)
+  void MergeSort (Node** headRef)
   {
-    struct Node* head = *headRef;
-    struct Node* a;
-    struct Node* b;
+    Node* head = *headRef;
+    Node* a;
+    Node* b;
     
     // B.C. > length 0 or 1 //
     if((head == NULL) || (head->next == NULL)){
@@ -32,9 +49,8 @@ void FrontBackSplit (struct Node* source, struct Node** frontRef, struct Node** 
    // answer = merg the 2 sorted lists together//
     *headRef = SortedMerge(a, b);
     
-struct Node* SortedMerge(struct Node* a, struct Node* b) 
-{ 
-struct Node* result = NULL; 
+Node* SortedMerge(struct Node* a, struct Node* b){ 
+Node* result = NULL; 
   
 /* Base cases */
 if (a == NULL) 
@@ -55,9 +71,9 @@ else if (b == NULL)
       return(result);
      }
       
-    void FrontBackSplit(struct Node* source, struct Node** frontRef, struct Node** backRef){
-      struct Node* fast;
-      struct Node* slow;
+    void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
+      Node* fast;
+      Node* slow;
       slow = source;
       fast = source->next;
       
@@ -86,9 +102,9 @@ else if (b == NULL)
         }
       }
      // insert a node in the beginning of a LL //
-      void push(struct Node** head_ref, int new_data){
+      void push(Node** head_ref, int new_data){
         // allocate node //
-        struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+        Node* new_node = (Node*) malloc(sizeof(Node));
         
         // put in data //
         new_node->data = new_data;
@@ -99,3 +115,7 @@ else if (b == NULL)
         // move head to point to the new node //
         (*head_ref) = new_node;
       }
+  }
+}
+
+
