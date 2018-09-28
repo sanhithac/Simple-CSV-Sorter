@@ -63,5 +63,5 @@ typedef struct{
 } */
 
 void readfile();
-String Node* mergesort( struct Node* a, struct Node* b);
+String Node* SortedMerge( struct Node* a, struct Node* b);
 void print(struct Node* a);
