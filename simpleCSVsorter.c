@@ -18,13 +18,22 @@ int main(int argc, char* argv[]){
 
 Node readfile(char *col[]){
   FILE *fp;
-  char firstrow[600];
+  char *firstrow;
+  fp=stdin;
+  char line[1000];
+  if(fp==NULL){
+    printf("Invalid Input");
+    return NULL;
+  }
   fscanf(fp, "%[^\n]", firstrow);
   int colInd=columnNum(firstrow, col[]);
   if(colInd==-1){
     printf("Invalid Input");
     return NULL;
-  while(
+  }
+  while(fgets(line, 1000, fp)!=NULL){
+	  
+  }
   
 int columnNum(char *row, char *col){
   char *word;
@@ -41,7 +50,7 @@ int columnNum(char *row, char *col){
     count++;
     token=strtok(NULL, s);
   }
-  return count;
+  return -1;
 }
   
 char *remove_leading_spaces(char* line) 
