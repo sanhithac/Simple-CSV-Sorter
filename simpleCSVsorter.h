@@ -38,5 +38,8 @@ typedef struct{
 } */
 
 void readfile();
+char *remove_leading_spaces(char* line);
+int columnNum(char *row, char *col);
 String Node* SortedMerge( struct Node* a, struct Node* b);
 void print(struct Node* a);
+
