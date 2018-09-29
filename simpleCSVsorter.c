@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "simpleCSVsorter.h"
 #include "mergesort.c"
+#include <string.h>
 
 int main(int argc, char* argv[]){
   if(argc<3){//error message if all the arguments are not available
@@ -25,12 +26,12 @@ Node readfile(char *col[]){
     return NULL;
   while(
   
-int columnNum(Char *row[], char *col[]){
-  char word[60];
+int columnNum(char *row, char *col){
+  char *word;
   const char s[2]=",";
   char *token;
-  token=strtok(row, s);
   int count=-1;
+  token=strtok(row, s);
   token=remove_leading_spaces(token);
   while(token!=NULL){
     if(strcmp(token, col)==0){
@@ -38,20 +39,30 @@ int columnNum(Char *row[], char *col[]){
       return count;
     }
     count++;
+    token=strtok(NULL, s);
   }
   return count;
 }
   
-static void remove_leading_spaces(char* line) 
+char *remove_leading_spaces(char* line) 
 {   
-   int i; 
-   for(i = 0; (*line)[i] == ' '; i++) {
-    *line += i;
-   }
+  char *trim(char* str){
+  char *end;
+  while(isspace((unsigned char)*str)){
+	  str++;
+  }
+  end=str+strlen(str)-1;
+  while(end>str && isspace((unsigned char)*end)){
+	  end--;
+  }
+      return str;
 } 
+
+void print(Node *head){
   temp = head;
   while (Node->data != NULL){
     printf("Data = &d\n", temp->data);
     temp = temp->next;
   }
-
+  return;
+}
