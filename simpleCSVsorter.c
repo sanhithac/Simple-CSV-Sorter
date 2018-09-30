@@ -45,6 +45,8 @@ Node readfile(char *col[]){
 	    head=curr;
     size++;
   }
+  return head;
+}
   
 int columnNum(char *row, char *col){
   char *word;
