@@ -1,8 +1,8 @@
 #include <stdlib.h>
 
 typedef struct{
-  void *data;
-  char[] *row;
+  char *data;
+  char *row;
   Node *next;
 }Node;
 
