@@ -4,19 +4,13 @@
 #include <string.h>
 
 int main(int argc, char* argv[]){
-  if(argc<3){//error message if all the arguments are not available
+  //error message if all the arguments are not available
+  if(argc<3){
     printf("Invalid Input");
     return 0;
   }
-  Node *head=readfile(argv[2]);//read file and organize rows into nodes
-  if(head==NULL)
-     return 0;
-  SortedMerge();//sorts the nodes/rows
-  print(Node *head);//prints the sorted nodes to stdout
-  return 0;
-}
-
-Node readfile(char *col[]){
+	
+  //opening the file and storing the values of the first row
   FILE *fp;
   char *firstrow;
   fp=stdin;
@@ -26,11 +20,36 @@ Node readfile(char *col[]){
     return NULL;
   }
   fscanf(fp, "%[^\n]", firstrow);
+
+  //read file and organize rows into nodes
+  Node *head=readfile(argv[2]);
+
+  //error checking
+  if(head==NULL)
+     return 0;
+	
+  //sorts the nodes/rows	
+  SortedMerge();
+	
+  //prints the first row and sorted nodes to stdout
+  printf("%s\n", firstrow);
+  print(Node *head);
+  return 0;
+}
+
+
+//reads file and organizes rows into nodes
+Node readfile(char *col[]){
+  //finds the index of column passed in args
   int colInd=columnNum(firstrow, col[]);
+
+  //error checking
   if(colInd==-1){
     printf("Invalid Input");
     return NULL;
   }
+	
+  //organizing the rows into nodes
   Node *curr =NULL;
   Node *head=NULL;
   Node *next=NULL;
@@ -39,7 +58,7 @@ Node readfile(char *col[]){
     curr=(Node *)malloc(sizeof(Node));
     (curr)->row=line;
     (curr->data)=tokenizer(colInd, line);
-    (curr)->ptr=next;
+    (curr)->next=next;
     curr=next;
     if(size==0)
 	    head=curr;
@@ -47,7 +66,9 @@ Node readfile(char *col[]){
   }
   return head;
 }
-  
+ 
+
+//finds the index of column
 int columnNum(char *row, char *col){
   char *word;
   const char s[2]=",";
@@ -66,9 +87,10 @@ int columnNum(char *row, char *col){
   return -1;
 }
   
-char *remove_leading_spaces(char* line) 
+
+//removes the leading and trailing whitespaces of a token
+char *remove_leading_spaces(char* str) 
 {   
-  char *trim(char* str){
   char *end;
   while(isspace((unsigned char)*str)){
 	  str++;
@@ -80,12 +102,14 @@ char *remove_leading_spaces(char* line)
       return str;
 } 
 	
+	
+//splits row into col values
 char *tokenizer(int col, char *line){
   const char s[2]=",";
   char *token;
   int count=0;
   token=strtok(line, s);
-  token=trim(token);
+  token=remove_leading_spaces(token);
   while(token!=NULL){
     if(col==count)
       return token;
@@ -95,10 +119,12 @@ char *tokenizer(int col, char *line){
   return token;
 }
 
+	
+//traverses through ll and prints nodes
 void print(Node *head){
   temp = head;
-  while (Node->ptr != NULL){
-    printf("Data = &d\n", temp->data);
+  while (temp->next != NULL){
+    printf(temp->row);
     temp = temp->next;
   }
   return;
