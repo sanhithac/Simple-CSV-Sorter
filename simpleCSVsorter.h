@@ -7,7 +7,7 @@ typedef struct{
 }Node;
 
 void readfile();
-char *remove_leading_spaces(char* line);
+char *remove_leading_spaces(char* str);
 int columnNum(char *row, char *col);
 char *tokenizer(int col, char *line);
 String Node* SortedMerge( struct Node* a, struct Node* b);
