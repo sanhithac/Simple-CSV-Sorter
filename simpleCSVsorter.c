@@ -38,7 +38,7 @@ Node readfile(char *col[]){
   while(fgets(line, 1000, fp)!=NULL){
     curr=(Node *)malloc(sizeof(Node));
     (curr)->row=line;
-    printf("%s\n", (curr)->row);
+    (curr->data)=tokenizer(colInd, line);
     (curr)->ptr=next;
     curr=next;
     if(size==0)
