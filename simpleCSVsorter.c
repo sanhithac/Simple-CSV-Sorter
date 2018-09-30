@@ -5,25 +5,26 @@
 
 int main(int argc, char* argv[]){
   //error message if all the arguments are not available
-  if(argc<3){
-    printf("Invalid Input");
+ if(argc<3){//error message if all the arguments are not available
+    printf("Invalid Input\n");
     return 0;
   }
-	
-  //opening the file and storing the values of the first row
   FILE *fp;
-  char *firstrow;
+  char firstrow[1000];
   fp=stdin;
-  char line[1000];
-  if(fp==NULL){
-    printf("Invalid Input");
-    return NULL;
+   if(fp==NULL){
+     printf("Invalid Input");
+     return -1;
   }
   fscanf(fp, "%[^\n]", firstrow);
-
-  //read file and organize rows into nodes
-  Node *head=readfile(argv[2]);
-
+  int colInd=columnNum(firstrow, argv[2]);
+  if(colInd==-1){
+    printf("Invalid Input");
+    return -1;
+  }
+	
+  Node *head=readfile(colInd, fp);//read file and organize rows into nodes
+	
   //error checking
   if(head==NULL)
      return 0;
@@ -38,30 +39,29 @@ int main(int argc, char* argv[]){
 }
 
 
-//reads file and organizes rows into nodes
-Node readfile(char *col[]){
-  //finds the index of column passed in args
-  int colInd=columnNum(firstrow, col[]);
-
-  //error checking
-  if(colInd==-1){
-    printf("Invalid Input");
-    return NULL;
-  }
+Node* readfile(int colInd, FILE *fp){
+  char line[1000];
 	
   //organizing the rows into nodes
-  Node *curr =NULL;
+  Node *temp =NULL;
   Node *head=NULL;
-  Node *next=NULL;
-  int size =0;
+  Node *p=NULL;
+  int size=0;
+	
   while(fgets(line, 1000, fp)!=NULL){
-    curr=(Node *)malloc(sizeof(Node));
-    (curr)->row=line;
-    (curr->data)=tokenizer(colInd, line);
-    (curr)->next=next;
-    curr=next;
-    if(size==0)
-	    head=curr;
+    temp=(Node *)malloc(sizeof(Node));
+    (temp)->row=line; 
+    (temp)->data=tokenizer(colInd, line);
+    if(head==NULL){
+      head=temp;
+    }
+    else{
+      p=head;
+      while(p->next!=NULL){
+	p=p->next;
+      }
+      p->next=temp;
+    }
     size++;
   }
   return head;
@@ -70,13 +70,13 @@ Node readfile(char *col[]){
 
 //finds the index of column
 int columnNum(char *row, char *col){
-  char *word;
+   char *word;
   const char s[2]=",";
   char *token;
   int count=-1;
   token=strtok(row, s);
-  token=remove_leading_spaces(token);
   while(token!=NULL){
+  token=remove_leading_spaces(token);
     if(strcmp(token, col)==0){
       count++;
       return count;
@@ -93,13 +93,14 @@ char *remove_leading_spaces(char* str)
 {   
   char *end;
   while(isspace((unsigned char)*str)){
-	  str++;
+	 str++;
   }
   end=str+strlen(str)-1;
   while(end>str && isspace((unsigned char)*end)){
 	  end--;
   }
-      return str;
+  return str;
+
 } 
 	
 	
@@ -109,10 +110,11 @@ char *tokenizer(int col, char *line){
   char *token;
   int count=0;
   token=strtok(line, s);
-  token=remove_leading_spaces(token);
   while(token!=NULL){
-    if(col==count)
+  token=remove_leading_spaces(token);
+    if(col==count){
       return token;
+    }
     count++;
     token=strtok(NULL,s);
   }
@@ -122,10 +124,11 @@ char *tokenizer(int col, char *line){
 	
 //traverses through ll and prints nodes
 void print(Node *head){
-  temp = head;
-  while (temp->next != NULL){
-    printf(temp->row);
-    temp = temp->next;
+  Node *p=NULL;
+  p=head;
+  while (p!= NULL){
+    printf("%s\n",p->row);
+    p = p->next;
   }
   return;
 }
