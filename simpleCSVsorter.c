@@ -31,8 +31,19 @@ Node readfile(char *col[]){
     printf("Invalid Input");
     return NULL;
   }
+  Node *curr =NULL;
+  Node *head=NULL;
+  Node *next=NULL;
+  int size =0;
   while(fgets(line, 1000, fp)!=NULL){
-	  
+    curr=(Node *)malloc(sizeof(Node));
+    (curr)->row=line;
+    printf("%s\n", (curr)->row);
+    (curr)->ptr=next;
+    curr=next;
+    if(size==0)
+	    head=curr;
+    size++;
   }
   
 int columnNum(char *row, char *col){
@@ -66,10 +77,25 @@ char *remove_leading_spaces(char* line)
   }
       return str;
 } 
+	
+char *tokenizer(int col, char *line){
+  const char s[2]=",";
+  char *token;
+  int count=0;
+  token=strtok(line, s);
+  token=trim(token);
+  while(token!=NULL){
+    if(col==count)
+      return token;
+    count++;
+    token=strtok(NULL,s);
+  }
+  return token;
+}
 
 void print(Node *head){
   temp = head;
-  while (Node->data != NULL){
+  while (Node->ptr != NULL){
     printf("Data = &d\n", temp->data);
     temp = temp->next;
   }
