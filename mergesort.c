@@ -38,7 +38,7 @@ Node* SortedMerge(struct Node* a, struct Node* b){
       // choose between a or b, than recur //
   result = strcmp(a, b);
  
-  if(result <=1){
+  if(result <=0){
    return(a);
   }else{
    return(b);
