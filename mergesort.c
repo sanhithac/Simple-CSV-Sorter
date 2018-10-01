@@ -6,8 +6,8 @@
   
   // sorts LL by changing next pointers, not data. //
   
-void MergeSort (Node* headRef){
-    Node* head = headRef;
+void MergeSort (Node** headRef){
+    Node* head = *headRef;
     Node* a;
     Node* b;
     
@@ -23,7 +23,7 @@ void MergeSort (Node* headRef){
     MergeSort(&b);
     
    // answer = merg the 2 sorted lists together//
-    headRef = SortedMerge(a, b);
+    *headRef = SortedMerge(a, b);
 }
     
 Node* SortedMerge(struct Node* a, struct Node* b){ 
