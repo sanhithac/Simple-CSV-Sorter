@@ -1,37 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "simpleCSVsorter.h"
 
-int main(){
- char str1[100];
- char str2[100];
- int ret;
- ret = strcmp(str1, str2);
- 
- if(ret < 0){
-  printf("str1 is less than str2");
- }else if(ret > 0){
-  printf("str2 is less than str1");
- }else{
-  printf("str1 is equal to str2");
- }
-   return(0);
-}
-
-struct Node{   // to store a linked list in the data structure
- 
-  int data;
-  struct Node* next;
-};
- // function prototypes //
-Node* SortedMerge(Node* a, Node* b){
-void FrontBackSplit (Node* source, Node** frontRef, Node** backRef);
   
   // sorts LL by changing next pointers, not data. //
   
-  void MergeSort (Node** headRef)
+  void MergeSort (Node* headRef)
   {
-    Node* head = *headRef;
+    Node* head = headRef;
     Node* a;
     Node* b;
     
@@ -47,7 +24,8 @@ void FrontBackSplit (Node* source, Node** frontRef, Node** backRef);
     MergeSort(&b);
     
    // answer = merg the 2 sorted lists together//
-    *headRef = SortedMerge(a, b);
+    headRef = SortedMerge(a, b);
+  }
     
 Node* SortedMerge(struct Node* a, struct Node* b){ 
 Node* result = NULL; 
@@ -59,19 +37,16 @@ else if (b == NULL)
     return(a);
       
       // choose between a or b, than recur //
-      if(a->data <= b->data){
-        result = a;
-        result->next = SortedMerge(a->next, b);
-      }
-      else
-      {
-        result = b;
-        result->next = SortedMerge(a, b->next);
-      }
-      return(result);
-     }
+  result = strcmp(a, b);
+ 
+  if(ret <=1 0){
+   return(a);
+  }else{
+   return(b);
+  }
+}
       
-    void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
+void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
       Node* fast;
       Node* slow;
       slow = source;
@@ -95,12 +70,7 @@ else if (b == NULL)
     }
       // print nodes in a LL //
       
-      void printList(struct Node *node){
-        while(node != NULL){
-          printf("%d", node->data);
-          node = node->next;
-        }
-      }
+
      // insert a node in the beginning of a LL //
       void push(Node** head_ref, int new_data){
         // allocate node //
