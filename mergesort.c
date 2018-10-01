@@ -6,8 +6,7 @@
   
   // sorts LL by changing next pointers, not data. //
   
-  void MergeSort (Node* headRef)
-  {
+void MergeSort (Node* headRef){
     Node* head = headRef;
     Node* a;
     Node* b;
@@ -25,21 +24,21 @@
     
    // answer = merg the 2 sorted lists together//
     headRef = SortedMerge(a, b);
-  }
+}
     
 Node* SortedMerge(struct Node* a, struct Node* b){ 
-Node* result = NULL; 
+  Node* result = NULL; 
   
 /* Base cases */
-if (a == NULL) 
+  if (a == NULL) 
     return(b); 
-else if (b == NULL) 
+  else if (b == NULL) 
     return(a);
       
       // choose between a or b, than recur //
   result = strcmp(a, b);
  
-  if(ret <=1 0){
+  if(result <=1){
    return(a);
   }else{
    return(b);
@@ -72,19 +71,6 @@ void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
       
 
      // insert a node in the beginning of a LL //
-      void push(Node** head_ref, int new_data){
-        // allocate node //
-        Node* new_node = (Node*) malloc(sizeof(Node));
-        
-        // put in data //
-        new_node->data = new_data;
-        
-        // linking old list with new node //
-        new_node->next = (*head_ref);
-        
-        // move head to point to the new node //
-        (*head_ref) = new_node;
-      }
   }
 }
 
