@@ -10,7 +10,7 @@ void MergeSort (Node** headRef){
     Node* head = *headRef;
     Node* a;
     Node* b;
-    
+
     // B.C. > length 0 or 1 //
     if((head == NULL) || (head->next == NULL)){
       return;
@@ -26,8 +26,8 @@ void MergeSort (Node** headRef){
     *headRef = SortedMerge(a, b);
 }
     
-Node* SortedMerge(struct Node* a, struct Node* b){ 
-  Node* result = NULL; 
+Node* SortedMerge(Node* a, Node* b){ 
+  int result = NULL; 
   
 /* Base cases */
   if (a == NULL) 
@@ -36,9 +36,9 @@ Node* SortedMerge(struct Node* a, struct Node* b){
     return(a);
       
       // choose between a or b, than recur //
-  result = strcmp(a, b);
+  result = strcmp(a->data, b->data);
  
-  if(result <=0){
+  if(result <= 0){
    return(a);
   }else{
    return(b);
@@ -50,18 +50,18 @@ void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
       Node* slow;
       slow = source;
       fast = source->next;
+      printf("%s\n", source->data);
       
       // keep going woith 'fast' and 'slow' nodes, each one node //
       
-      while(fast != NULL)
-      {
+      while(fast != NULL){
         fast = fast->next;
         if(fast != NULL)
         {
           slow = slow->next;
           fast = fast->next;
         }
-      }
+      
       // slow is tye midpoint area so split there //
       *frontRef = source;
       *backRef = slow->next;
@@ -72,6 +72,3 @@ void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
 
      // insert a node in the beginning of a LL //
   }
-}
-
-
