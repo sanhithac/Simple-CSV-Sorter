@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]){
   //error message if all the arguments are not available
- if(argc<3){//error message if all the arguments are not available
+  if(argc<3){
     printf("Invalid Input\n");
     return 0;
   }
@@ -32,10 +32,9 @@ int main(int argc, char* argv[]){
 	
   //sorts the nodes/rows
   Node **new=&head;	
-  MergeSort(new);
+  //  MergeSort(new);
 	
   //prints the first row and sorted nodes to stdout
-  //  printf("%s\n", firstrow);
   print(head);
    return 0;
 }
@@ -49,20 +48,21 @@ Node* readfile(int colInd, FILE *fp){
   Node *head=NULL;
   Node *p=NULL;
   int size=0;
+  char *str;
 	
   while(fgets(line, 1000, fp)!=NULL){
     if(size!=0){
       temp=(Node *)malloc(sizeof(Node));
-      (temp)->row=line; 
-      (temp)->data=tokenizer(colInd, line);
+      temp->row=(char*)malloc(sizeof(char)*1000);
+      temp->data=(char*)malloc(sizeof(char)*100);
+      strcpy((temp)->row, line);
+      str=tokenizer(colInd, line);
+      strcpy((temp)->data,str);
       if(head==NULL){
 	head=temp;
-	//	printf("%s\n", head->row);// only the first word is printing out
       }
       else{
 	p=head;
-	//	printf("%s\n", p->row); //doesn't print row, prints other data
-	//	printf("%s\n", p->data);//doesn't pring head data
 	while(p->next!=NULL){
 	  p=p->next;
 	}
@@ -139,4 +139,3 @@ void print(Node *head){
   }
   return;
 }
-
