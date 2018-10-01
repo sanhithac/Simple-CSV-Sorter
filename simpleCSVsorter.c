@@ -9,6 +9,7 @@ int main(int argc, char* argv[]){
     printf("Invalid Input\n");
     return 0;
   }
+	
   FILE *fp;
   char firstrow[1000];
   fp=stdin;
@@ -36,6 +37,10 @@ int main(int argc, char* argv[]){
 	
   //prints the first row and sorted nodes to stdout
   print(head);
+	
+  //free data
+  Finish(head);
+	
    return 0;
 }
 
