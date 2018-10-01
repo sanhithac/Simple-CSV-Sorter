@@ -30,11 +30,11 @@ int main(int argc, char* argv[]){
      return 0;
 	
   //sorts the nodes/rows	
-  SortedMerge();
+  mergesort(head);;
 	
   //prints the first row and sorted nodes to stdout
   printf("%s\n", firstrow);
-  print(Node *head);
+  print(head);
   return 0;
 }
 
