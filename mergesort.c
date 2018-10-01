@@ -4,45 +4,44 @@
 #include "simpleCSVsorter.h"
 
   
-  // sorts LL by changing next pointers, not data. //
+  // sorts LL 
   
 void MergeSort (Node** headRef){
     Node* head = *headRef;
     Node* a;
     Node* b;
 
-    // B.C. > length 0 or 1 //
     if((head == NULL) || (head->next == NULL)){
       return;
     }
-  // split head into 'a' 'b'//
+  // split head into 'a' 'b'
     FrontBackSplit(head, &a, &b);
     
-   // Recursive sort sublist//
     MergeSort(&a);
     MergeSort(&b);
     
-   // answer = merg the 2 sorted lists together//
     *headRef = SortedMerge(a, b);
 }
     
 Node* SortedMerge(Node* a, Node* b){ 
-  int result = NULL; 
+  Node* result = NULL; 
+  int cmp=0;
   
-/* Base cases */
   if (a == NULL) 
     return(b); 
   else if (b == NULL) 
     return(a);
       
-      // choose between a or b, than recur //
-  result = strcmp(a->data, b->data);
+  cmp = strcmp(a->data, b->data);
  
-  if(result <= 0){
-   return(a);
+  if(cmp <= 0){
+    result=a;
+    result->next=SortedMerge(a->next, b);
   }else{
-   return(b);
+    result=b;
+    result->next=SortedMerge(a, b->next);
   }
+  return(result);
 }
       
 void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
@@ -50,9 +49,6 @@ void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
       Node* slow;
       slow = source;
       fast = source->next;
-      printf("%s\n", source->data);
-      
-      // keep going woith 'fast' and 'slow' nodes, each one node //
       
       while(fast != NULL){
         fast = fast->next;
@@ -62,13 +58,11 @@ void FrontBackSplit(Node* source, Node** frontRef, Node** backRef){
           fast = fast->next;
         }
       
-      // slow is tye midpoint area so split there //
+      //assign the front and back to a and b
       *frontRef = source;
       *backRef = slow->next;
       slow->next = NULL;
     }
-      // print nodes in a LL //
-      
 
-     // insert a node in the beginning of a LL //
   }
+
