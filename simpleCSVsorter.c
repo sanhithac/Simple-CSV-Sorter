@@ -29,8 +29,9 @@ int main(int argc, char* argv[]){
   if(head==NULL)
      return 0;
 	
-  //sorts the nodes/rows	
-  mergesort(head);;
+  //sorts the nodes/rows
+  Node **new= head;
+  mergesort(head);
 	
   //prints the first row and sorted nodes to stdout
   printf("%s\n", firstrow);
