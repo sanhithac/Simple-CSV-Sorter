@@ -139,3 +139,15 @@ void print(Node *head){
   }
   return;
 }
+
+void Finish(Node* head){ //frees everything
+	Node* temp = head;
+	Node*p=NULL;
+	int n = 0;
+	while(temp!= NULL){
+		free(temp->row);
+		free(temp->data);
+		p=temp->next;
+		free(temp);
+		temp=p;
+}
