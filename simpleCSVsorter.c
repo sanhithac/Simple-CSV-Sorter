@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "simpleCSVsorter.h"
 #include "mergesort.c"
+#include <stdio.h>
 #include <string.h>
 
 int main(int argc, char* argv[]){
@@ -17,6 +17,7 @@ int main(int argc, char* argv[]){
      return -1;
   }
   fscanf(fp, "%[^\n]", firstrow);
+  printf("%s\n", firstrow);
   int colInd=columnNum(firstrow, argv[2]);
   if(colInd==-1){
     printf("Invalid Input");
@@ -30,13 +31,13 @@ int main(int argc, char* argv[]){
      return 0;
 	
   //sorts the nodes/rows
-  Node **new= head;
-  mergesort(head);
+  Node **new=&head;	
+  MergeSort(new);
 	
   //prints the first row and sorted nodes to stdout
-  printf("%s\n", firstrow);
+  //  printf("%s\n", firstrow);
   print(head);
-  return 0;
+   return 0;
 }
 
 
@@ -50,18 +51,23 @@ Node* readfile(int colInd, FILE *fp){
   int size=0;
 	
   while(fgets(line, 1000, fp)!=NULL){
-    temp=(Node *)malloc(sizeof(Node));
-    (temp)->row=line; 
-    (temp)->data=tokenizer(colInd, line);
-    if(head==NULL){
-      head=temp;
-    }
-    else{
-      p=head;
-      while(p->next!=NULL){
-	p=p->next;
+    if(size!=0){
+      temp=(Node *)malloc(sizeof(Node));
+      (temp)->row=line; 
+      (temp)->data=tokenizer(colInd, line);
+      if(head==NULL){
+	head=temp;
+	//	printf("%s\n", head->row);// only the first word is printing out
       }
-      p->next=temp;
+      else{
+	p=head;
+	//	printf("%s\n", p->row); //doesn't print row, prints other data
+	//	printf("%s\n", p->data);//doesn't pring head data
+	while(p->next!=NULL){
+	  p=p->next;
+	}
+	p->next=temp;
+      }
     }
     size++;
   }
@@ -78,10 +84,10 @@ int columnNum(char *row, char *col){
   token=strtok(row, s);
   while(token!=NULL){
   token=remove_leading_spaces(token);
-    if(strcmp(token, col)==0){
+   if(strcmp(token, col)==0){
       count++;
       return count;
-    }
+      }
     count++;
     token=strtok(NULL, s);
   }
@@ -133,3 +139,4 @@ void print(Node *head){
   }
   return;
 }
+
