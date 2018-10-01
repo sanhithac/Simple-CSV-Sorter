@@ -14,3 +14,4 @@ void FrontBackSplit (Node* source, Node** frontRef, Node** backRef);
 void MergeSort (Node* headRef);
 Node* SortedMerge( Node* a, Node* b);
 void print( Node* a);
+void Finish(Node* head);
